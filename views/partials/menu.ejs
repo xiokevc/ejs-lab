@@ -3,16 +3,42 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Menu</title>
+  <title>Full Menu</title>
 </head>
 <body>
   <%- include('partials/nav') %>
 
-  <h1>Menu</h1>
+  <h1>Full Menu</h1>
+
+  <h2>Mains</h2>
   <ul>
-    <% menu.forEach(item => { %>
+    <% menu.filter(item => item.category === 'mains').forEach(item => { %>
       <li>
-        <h2><%= item.name %></h2>
+        <h3><%= item.name %></h3>
+        <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
+        <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
+        <p><strong>Details:</strong> <%= item.details %></p>
+      </li>
+    <% }) %>
+  </ul>
+
+  <h2>Desserts</h2>
+  <ul>
+    <% menu.filter(item => item.category === 'desserts').forEach(item => { %>
+      <li>
+        <h3><%= item.name %></h3>
+        <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
+        <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
+        <p><strong>Details:</strong> <%= item.details %></p>
+      </li>
+    <% }) %>
+  </ul>
+
+  <h2>Sides</h2>
+  <ul>
+    <% menu.filter(item => item.category === 'sides').forEach(item => { %>
+      <li>
+        <h3><%= item.name %></h3>
         <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
         <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
         <p><strong>Details:</strong> <%= item.details %></p>

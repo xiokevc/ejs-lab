@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const restaurantName = ('The Green Byte Bistro');
+
+app.set('view engine', 'ejs');
+
 const RESTAURANT = {
   name: 'The Green Byte Bistro',
   isOpen: true,
@@ -48,26 +50,30 @@ const RESTAURANT = {
       details: 'Crispy and lightly seasoned string bean fries, served in a pattern for a fun twist.'
     }
   ]
-}
+};
 
+// -------------------- ROUTES --------------------
+
+// Home page route
 app.get('/', (req, res) => {
-    res.render('home', { restaurant: RESTAURANT });
+  res.render('home', { restaurant: RESTAURANT });
 });
 
-app.get('/category/:category', (req, res) => {
-    const categoryParam = req.params.category.toLowerCase();
-
-const menuItems = RESTAURANT.menu.filter(
-    item => item.category.toLowerCase() === categoryParam
-);  
-
-const menuItems = RESTAURANT.menu.filter(
-    item => item.category.toLowerCase() === categoryParam
-);
-
+// Menu page route
 app.get('/menu', (req, res) => {
-    res.render('menu', { menu: RESTAURANT.menu }); 
-  // sending only menu array as locals
+  res.render('menu', { menu: RESTAURANT.menu });
+});
+
+// Category page route
+app.get('/menu/:category', (req, res) => {
+  const categoryParam = req.params.category.toLowerCase();
+
+  const menuItems = RESTAURANT.menu.filter(item => item.category.toLowerCase() === categoryParam);
+
+  // Capitalize first letter for UI
+  const categoryName = categoryParam.charAt(0).toUpperCase() + categoryParam.slice(1);
+
+  res.render('category', { categoryName, menuItems });
 });
 
 app.listen(3000);

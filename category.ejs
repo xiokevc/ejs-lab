@@ -3,9 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Category</title>
+  <title><%= categoryName %> Menu</title>
 </head>
 <body>
-  <h1>Category</h1>
+  <%- include('partials/nav') %>
+
+  <h1><%= categoryName %> Menu</h1>
+
+  <ul>
+    <% menuItems.forEach(item => { %>
+      <li>
+        <h2><%= item.name %></h2>
+        <p><strong>Price:</strong> $<%= item.price.toFixed(2) %></p>
+        <p><strong>Rating:</strong> <%= item.rating %> / 5</p>
+        <p><strong>Details:</strong> <%= item.details %></p>
+      </li>
+    <% }) %>
+  </ul>
 </body>
 </html>
